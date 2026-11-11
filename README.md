@@ -1,9 +1,11 @@
-# 📌 API de Gerenciamento de Tarefas (Flask + JWT)
+> 🇧🇷 [Versão em português](README.pt-BR.md)
 
-Esta é uma API REST desenvolvida com Flask para gerenciamento de tarefas, com autenticação de usuários usando JWT (JSON Web Token).
-O projeto permite que cada usuário possa se cadastrar, fazer login e gerenciar suas próprias tarefas (CRUD).
+# 📌 Task Management API (Flask + JWT)
 
-# 🚀 Tecnologias utilizadas
+A REST API built with Flask for task management, with user authentication using JWT (JSON Web Token).
+Each user can sign up, log in and manage their own tasks (CRUD).
+
+# 🚀 Stack
 
 Python
 
@@ -13,39 +15,40 @@ Flask-SQLAlchemy
 
 Flask-JWT-Extended
 
-SQLite (banco de dados local)
+SQLite (local database)
 
-# 📁 Estrutura do Projeto
+# 📁 Project layout
 <pre>
 api-gerenciamento-tarefas/
 └── instance/
-    └── tarefas.db        # Banco SQLite (criado automaticamente)
+    └── tarefas.db        # SQLite database (created automatically)
 ├── routes/
-│   ├── auth_routes.py    # Rotas de autenticação
-│   └── task_routes.py    # Rotas das tarefas
-├── .gitattributes        # Configurações de atributos de arquivos para o Git
-├── .gitignore            # Lista de arquivos e diretórios a serem ignorados pelo Git
-├── app.py                # Arquivo principal do Flask
-├── database.py           # Modelos e conexão com banco de dados
-├── extensions.py         # Inicialização e configuração de extensões Flask
-├── README.md             # Este arquivo
-└── requirements.txt      # Dependências do projeto
+│   ├── auth_routes.py    # Authentication routes
+│   └── task_routes.py    # Task routes
+├── .gitattributes        # Git file attribute settings
+├── .gitignore            # Files and directories ignored by Git
+├── app.py                # Main Flask file
+├── database.py           # Models and database connection
+├── extensions.py         # Flask extension setup
+├── README.md             # This file (English)
+├── README.pt-BR.md       # Portuguese version
+└── requirements.txt      # Project dependencies
 </pre>
-# ⚙️ Como executar o projeto
-## 1. Clone o repositório:
+# ⚙️ Running the project
+## 1. Clone the repository:
 ```bash
-git clone https://github.com/gutelo/api-gerenciamento-tarefas.git
+git clone https://github.com/gualmeidap/api-gerenciamento-tarefas.git
 
 cd api-gerenciamento-tarefas
 ```
 
-## 2. Crie um ambiente virtual (opcional, mas recomendado):
+## 2. Create a virtual environment (optional but recommended):
 
 ```bash
 python -m venv venv
 ```
 
-### Ative o ambiente:
+### Activate it:
 
 #### Linux/macOS:
 ```bash
@@ -55,19 +58,22 @@ source venv/bin/activate
 ```bash
 venv\Scripts\activate
 ```
-## 3. Instale as dependências:
+## 3. Install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-## 4. Execute a aplicação:
+## 4. Run the application:
 ```bash
 python app.py
 ```
 
-# 🧪 Testando a API e Respostas Esperadas usando [Postman](https://www.postman.com/downloads/)
+# 🧪 Testing the API and expected responses with [Postman](https://www.postman.com/downloads/)
+
+> The API's response messages (`msg`) are in Portuguese, exactly as the API returns them.
+
 ## 1. Register User
 
-Método: POST
+Method: POST
 
 Endpoint: http://127.0.0.1:5000/register
 
@@ -80,7 +86,7 @@ Endpoint: http://127.0.0.1:5000/register
 }
 ```
 
-#### Resposta esperada (201):
+#### Expected response (201):
 ```bash 
 {
   "msg": "Usuário registrado com sucesso"
@@ -88,7 +94,7 @@ Endpoint: http://127.0.0.1:5000/register
 ```
 ## 2. Login User
 
-Método: POST
+Method: POST
 
 Endpoint: http://127.0.0.1:5000/login
 
@@ -99,10 +105,10 @@ Endpoint: http://127.0.0.1:5000/login
   "password": "123456"
 }
 ```
-#### Resposta esperada (200):
+#### Expected response (200):
 ```bash
 {
-  "access_token": "<jwt_token_aqui>",
+  "access_token": "<jwt_token_here>",
   "user": {
     "id": 1,
     "username": "usuario1",
@@ -110,11 +116,11 @@ Endpoint: http://127.0.0.1:5000/login
   }
 }
 ```
-📌 Observação: pegue o token do /login e use no header de Create, List, Update e Delete.
+📌 Note: take the token from `/login` and use it in the header of Create, List, Update and Delete.
 
 ## 3. Create Task
 
-Método: POST
+Method: POST
 
 Endpoint: http://127.0.0.1:5000/tasks
 
@@ -126,26 +132,26 @@ Endpoint: http://127.0.0.1:5000/tasks
 }
 ```
 
-#### Resposta esperada (201 Created)
+#### Expected response (201 Created)
 ```bash
 {
   "msg": "Tarefa criada com sucesso",
   "id": 1
 }
 ```
-📌 Observação: anote o id retornado — você usará ele nos testes de update/delete.
+📌 Note: keep the returned id, you will use it in the update/delete tests.
 
-## 4. List Task
+## 4. List Tasks
 
-Método: GET
+Method: GET
 
 Endpoint: http://127.0.0.1:5000/tasks
 
 Headers:
 
-Authorization: Bearer <seu_token>
+Authorization: Bearer <your_token>
 
-#### Resposta (200):
+#### Response (200):
 ```bash
 [
   {
@@ -158,7 +164,7 @@ Authorization: Bearer <seu_token>
 ```
 ## 5. Update Task
 
-Método: PUT
+Method: PUT
 
 Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 
@@ -170,7 +176,7 @@ Endpoint: http://127.0.0.1:5000/tasks/<task_id>
   "completed": true
 }
 ```
-#### Resposta esperada (200 OK)
+#### Expected response (200 OK)
 ```bash
 {
   "msg": "Tarefa atualizada com sucesso"
@@ -178,35 +184,35 @@ Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 ```
 ## 6. Delete Task
 
-Método: DELETE
+Method: DELETE
 
 Endpoint: http://127.0.0.1:5000/tasks/<task_id>
 
-#### Resposta esperada (200 OK)
+#### Expected response (200 OK)
 ```bash
 {
   "msg": "Tarefa deletada com sucesso"
 }
 ```
-# Sequência de verificação rápida (fluxo completo)
+# Quick verification sequence (full flow)
 ```bash
-POST /tasks → cria, retorna id = N.
+POST /tasks → creates, returns id = N.
 
-GET /tasks → verifique que a tarefa aparece na lista.
+GET /tasks → check that the task appears in the list.
 
-PUT /tasks/N → atualizar campos.
+PUT /tasks/N → update fields.
 
-GET /tasks → verifique que as alterações apareceram.
+GET /tasks → check that the changes show up.
 
-DELETE /tasks/N → deletar.
+DELETE /tasks/N → delete.
 
-GET /tasks → verifique que a tarefa sumiu da lista.
+GET /tasks → check that the task is gone from the list.
 ```
 
-# ✅ Contribuição
+# ✅ Contributing
 
-Sinta-se à vontade para clonar, modificar e testar o projeto. Sugestões são sempre bem-vindas! 🚀
+Feel free to clone, modify and test the project. Suggestions are always welcome! 🚀
 
-# 📄 Licença
+# 📄 License
 
-Este projeto está sob a licença MIT.
+This project is licensed under the MIT license.
